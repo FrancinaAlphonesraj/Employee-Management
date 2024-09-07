@@ -11,7 +11,7 @@ import com.example.employee.employee.repo.DepartmentRepo;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-	
+
 	@Autowired
 	private DepartmentRepo deptrepo;
 
@@ -24,7 +24,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public List<Department> fetchDepartmentList() {
 
-		return (List<Department>)deptrepo.findAll();
+		return (List<Department>) deptrepo.findAll();
 	}
 
 	@Override
@@ -35,16 +35,15 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	public Department updateDepartment(Department dept, Long deptId) {
-		
+
 		Department department = deptrepo.findById(deptId).get();
-		
-		if(department.getDepartmentName() != null) {
-			
+
+		if (department.getDepartmentName() != null) {
+
 			department.setDepartmentName(department.getDepartmentName());
-			
+
 		}
-		
-		
+
 		return deptrepo.save(department);
 	}
 
@@ -52,7 +51,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	public void deleteDepartmentbyID(Long deptId) {
 		// TODO Auto-generated method stub
 		deptrepo.deleteById(deptId);
-		
+
 	}
 
 }

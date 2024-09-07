@@ -24,26 +24,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public List<Employee> fetchEmployeeList() {
 		// TODO Auto-generated method stub
-		return (List<Employee>)employeerepo.findAll();
+		return (List<Employee>) employeerepo.findAll();
 	}
 
 	@Override
 	public Employee updateEmployee(Employee employee, Long empId) {
 		// TODO Auto-generated method stub
-		
-		Employee emp = employeerepo.findById(empId).get();
-		
-	
-			emp.setEmpId(employee.getEmpId());
-			emp.setEmployeeName(employee.getEmployeeName());
-			emp.setEmployeeAge(employee.getEmployeeAge());
-			emp.setHiredate(employee.getHiredate());
-			emp.setPhoneno(employee.getPhoneno());
-			emp.setEmployeeDesignation(employee.getEmployeeDesignation());
-			emp.setEmployeeSalary(employee.getEmployeeSalary());
 
-		
-		
+		Employee emp = employeerepo.findById(empId).get();
+
+		emp.setEmpId(employee.getEmpId());
+		emp.setEmployeeName(employee.getEmployeeName());
+		emp.setEmployeeAge(employee.getEmployeeAge());
+		emp.setHiredate(employee.getHiredate());
+		emp.setPhoneno(employee.getPhoneno());
+		emp.setEmployeeDesignation(employee.getEmployeeDesignation());
+		emp.setEmployeeSalary(employee.getEmployeeSalary());
+
 		return employeerepo.save(emp);
 	}
 
@@ -55,9 +52,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Optional<Employee> findById(long empId) {
-		
+
 		return employeerepo.findById(empId);
-		 
+
 	}
 
 }

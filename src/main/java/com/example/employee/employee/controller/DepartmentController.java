@@ -16,55 +16,49 @@ import com.example.employee.employee.service.EmployeeService;
 import io.swagger.annotations.Api;
 
 @Controller
-@Api(value = "Employee Management System", description = "Operations pertaining to employee in Employee Management System")
 
 public class DepartmentController {
-	
-	@Autowired	
+
+	@Autowired
 	private DepartmentService deptservice;
-	
-	
-	    @GetMapping("/showDepartmentList")
-	    public String showDeptLit(Model model) {
-	        model.addAttribute("departments", deptservice.fetchDepartmentList());
-	        return "DepartmentList";
-	    }
-	    
-	    @GetMapping("/showNewDepartmentForm")
-	    public String showNewDepartmentForm(Model model) {
-	        Department dept = new Department();
-	        model.addAttribute("department", dept);
 
-	        return "Department";
-	    }
-	
+	@GetMapping("/showDepartmentList")
+	public String showDeptLit(Model model) {
+		model.addAttribute("departments", deptservice.fetchDepartmentList());
+		return "DepartmentList";
+	}
 
-	
-	
+	@GetMapping("/showNewDepartmentForm")
+	public String showNewDepartmentForm(Model model) {
+		Department dept = new Department();
+		model.addAttribute("department", dept);
+
+		return "Department";
+	}
+
 	@PostMapping("/createDept")
-    public String saveDepartment(@ModelAttribute("department") Department dept) {
+	public String saveDepartment(@ModelAttribute("department") Department dept) {
 
-        Department createdDept = deptservice.saveDepartment(dept);
-        return "redirect:/showDepartmentList";
-    }
-	
-	
+		Department createdDept = deptservice.saveDepartment(dept);
+		return "redirect:/showDepartmentList";
+	}
+
 	@GetMapping("/findDeptById/{deptId}")
-    public String updateDepartment(@PathVariable(value = "deptId") long deptId, Model model) {
-        Department department = deptservice.findByDeptId(deptId).orElseThrow(() -> new IllegalArgumentException("Invalid Department Id:" + deptId));
-        
-        model.addAttribute("department", department);
+	public String updateDepartment(@PathVariable(value = "deptId") long deptId, Model model) {
+		Department department = deptservice.findByDeptId(deptId)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid Department Id:" + deptId));
 
-        return "Department_Update";
-    }
-	
-	
+		model.addAttribute("department", department);
 
-    @GetMapping("/deleteDept/{deptId}")
-    public String deleteDepartment(@PathVariable(value = "deptId") long deptId) {
-        Department dept = deptservice.findByDeptId(deptId).orElseThrow(() -> new IllegalArgumentException("Invalid Department Id:" + deptId));
-        deptservice.deleteDepartmentbyID(deptId);
-        return "redirect:/showDepartmentList";
-    }
+		return "Department_Update";
+	}
+
+	@GetMapping("/deleteDept/{deptId}")
+	public String deleteDepartment(@PathVariable(value = "deptId") long deptId) {
+		Department dept = deptservice.findByDeptId(deptId)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid Department Id:" + deptId));
+		deptservice.deleteDepartmentbyID(deptId);
+		return "redirect:/showDepartmentList";
+	}
 
 }
